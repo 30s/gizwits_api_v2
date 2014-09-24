@@ -5,30 +5,6 @@ HOST: http://sitev4.iotsdk.com/v2
 
 # Group API for passowrd protect question
 
-## Question [/question]
-
-### Get All Questions [GET]
-
-+ Request (application/json)
-
-    + Header
-
-        Authorization: Basic a2VsbHk=
-
-+ Response 200 (application/json)
-
-    + Body
-    
-        {
-          "questions": [{
-            "id": 1,
-            "content": "What's your name?"
-          },{
-            "id": 2,
-            "content": "Where are you from?"
-          }]
-        }
-
 ## Answer [/answer]
 
 ### Register and Set Answer [POST]
@@ -51,9 +27,9 @@ HOST: http://sitev4.iotsdk.com/v2
 + Response 200 (application/json)
 
 
-## Reset Password by Question [/reset_pwd]
+## Answer [/answer/verify]
 
-### Reset Password by Question [POST]
+### Verify Answer [POST]
 
 + Request (application/json)
 
@@ -67,7 +43,32 @@ HOST: http://sitev4.iotsdk.com/v2
           "username": "15813269587",
           "question_id": 1,
           "answer": "bob"
-          "new_pwd": "123456"
+        }
+
++ Response 200 (application/json)
+
+    + Body
+    
+        {
+          "code": "abc"
+        }
+
+## Reset Password by Code [/reset_pwd]
+
+### Reset Password by Code [POST]
+
++ Request (application/json)
+
+    + Header
+
+        Authorization: Basic a2VsbHk=
+
+    + Body
+
+        {
+          "username": "15813269587",
+          "new_pwd": "123456",
+          "code": "abc"
         }
 
 + Response 200 (application/json)
