@@ -1,47 +1,73 @@
 FORMAT: 1A
-HOST: http://www.google.com
+HOST: http://sitev4.iotsdk.com/v2
 
-# gizwits_api_v2
-Notes API is a *short texts saving* service similar to its physical paper presence on your table.
+# Gizwits Site API v2
 
-# Group Notes
-Notes related resources of the **Notes API**
+# Group API for passowrd protect question
 
-## Notes Collection [/notes]
-### List all Notes [GET]
-+ Response 200 (application/json)
+## Question [/question]
 
-        [{
-          "id": 1, "title": "Jogging in park"
-        }, {
-          "id": 2, "title": "Pick-up posters from post-office"
-        }]
+### Get All Questions [GET]
 
-### Create a Note [POST]
 + Request (application/json)
-
-        { "title": "Buy cheese and bread for breakfast." }
-
-+ Response 201 (application/json)
-
-        { "id": 3, "title": "Buy cheese and bread for breakfast." }
-
-## Note [/notes/{id}]
-A single Note object with all its details
-
-+ Parameters
-    + id (required, number, `1`) ... Numeric `id` of the Note to perform action with. Has example value.
-
-### Retrieve a Note [GET]
-+ Response 200 (application/json)
 
     + Header
 
-            X-My-Header: The Value
+        Authorization: Basic {token}
+
++ Response 200 (application/json)
+
+    + Body
+    
+        {
+          "questions": [{
+            "id": 1,
+            "content": "What's your name?"
+          },{
+            "id": 1,
+            "content": "Where are you from?"
+          }]
+        }
+
+## Answer [/answer]
+
+### Register and Set Answer [POST]
+
++ Request (application/json)
+
+    + Header
+
+        Authorization: Basic {token}
 
     + Body
 
-            { "id": 2, "title": "Pick-up posters from post-office" }
+        {
+          "username": "15813269587",
+          "password": "123456",
+          "question_id": 1,
+          "answer": "bob"
+        }
 
-### Remove a Note [DELETE]
-+ Response 204
++ Response 200 (application/json)
+
+
+## Reset Password by Question [/reset_pwd]
+
+### Reset Password by Question [POST]
+
++ Request (application/json)
+
+    + Header
+
+        Authorization: Basic {token}
+
+    + Body
+
+        {
+          "username": "15813269587",
+          "question_id": 1,
+          "answer": "bob"
+          "new_pwd": "123456"
+        }
+
++ Response 200 (application/json)
